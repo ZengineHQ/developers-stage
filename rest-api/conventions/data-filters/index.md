@@ -29,7 +29,7 @@ The `prefix` specifies the mode for matching.  See the Prefixes section for more
 
 The `attribute` specifies the data field to check for matching.  See the Attributes section for more information.
 
-If `value` is passed, records with attributes matching the `prefix` and `value` will be produced for this condition.  This is the most common condition type.  `value` is passed as a string or number.
+If `value` is passed, records with attributes matching the `prefix` and `value` will be produced for this condition.  This is the most common condition type.  `value` is passed as a string, number, or array (when using `in` or `not-in`).
 
 Optionally, a filter object may be passed to the `filter` key instead of a `value`.  This allows you to set up a subfilter on linked forms.  See the Subfilters section for more information.  
 
@@ -44,6 +44,8 @@ One `prefix` is required for every condition. A `prefix` is passed as a string. 
 * '__contains__': Contains substring
 * '__starts-with__': Starts with substring
 * '__ends-with__': Ends with substring
+* '__in__': Value is any of the items in a list. Condition value should be an array of included values.
+* '__not-in__': Value is not any of the items in a list. Condition value should be an array of excluded values.
 * '__not-validates__': Does not match validation rule. Value must be one of the following:
   * alpha
   * alphaNumeric
@@ -51,6 +53,23 @@ One `prefix` is required for every condition. A `prefix` is passed as a string. 
   * numeric
   * unique
   * zipCode
+
+ {% highlight js%}
+ {
+  	"and": [
+		{
+			"prefix": "",
+			"attribute": "field1",
+			"value": "Web Developer"
+		},
+		{
+			"prefix": "in",
+			"attribute": "field2",
+			"value": ["PHP", "Javascript"]
+		}
+	]
+ }
+{% endhighlight %}
 
 ### Attributes
 An `attribute` may be either a form field or a basic property of a record.  Inspect the results of a request to the form records endpoint to see attributes you can choose from.  If your record comes back with 'field123' and 'field456' keys, those may be used as attributes.
@@ -92,7 +111,7 @@ Subfilters may be nested up to 5 levels deep.
 Subfilters can be set up on either belongsTo or hasOne linked form relations.
 
 #### belongsTo links
-The most common subfilter type is belongsTo.  For example, say we have two forms with the following fields: 
+The most common subfilter type is belongsTo.  For example, say we have two forms with the following fields:
 
 * __Companies__ (form1)
 	* field10: "Company Name"
