@@ -37,4 +37,7 @@
 pre {
 	background-color: white !important;
 }
-
+#swagger-ui pre  {
+	background: #7d8492 !important;
+	border:none !important;
+}
