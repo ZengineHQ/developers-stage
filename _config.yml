@@ -4,7 +4,7 @@ angularBootstrapVersion: 0.12.1
 version: 1
 baseurl: '/developers-stage'
 exclude: [README.md, Gemfile, Gemfile.lock, CNAME]
-apiDomain: "https://stage-api.zenginehq.com"
+apiDomain: "https://api.stage.zenginehq.com"
 marketingDomain: "http://www.zenginehq.com"
 clientDomain: "https://stage-platform.zenginehq.com"
 pluginDomain: "https://stage-plugins.zenginehq.com"
